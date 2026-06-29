@@ -1,0 +1,19 @@
+Exercise 7: Financial Forecasting
+
+
+1. Understanding Recursive Algorithms
+Recursion is a technique where a function calls itself to solve a smaller part
+of the same problem. It makes problems like forecasting and calculations 
+easier to understand and implement.
+
+2. Setup
+Create a recursive method that calculates the future value using the previous value and the growth rate.
+
+3. Implementation
+Implement a recursive function that repeatedly applies the growth rate until the required future
+period is reached.
+
+4. Analysis
+Time Complexity: O(n), where n is the number of forecasting periods.
+Optimization: Use memoization or dynamic programming to store previously
+calculated values and avoid repeated computations, making the algorithm more efficient.

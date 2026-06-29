@@ -1,0 +1,23 @@
+Exercise 2: E-commerce Platform Search Function
+1. Understanding Asymptotic Notation
+Big O Notation: Big O measures how an algorithm's performance changes as the amount of data increases.
+Best Case: Item is found immediately.
+Average Case: Item is found after checking some elements.
+Worst Case: Item is found at the end or not found at all.
+2. Setup
+
+Create  Product class with:
+
+productId
+productName
+category
+3. Implementation
+Linear Search: Searches each product one by one in an array.
+Binary Search: Searches a sorted array by repeatedly checking the middle element.
+4. Analysis
+Algorithm	Best	Average	Worst
+Linear Search	O(1)	O(n)	O(n)
+Binary Search	O(1)	O(log n)	O(log n)
+
+Conclusion: Binary search is better for large e-commerce platforms because it is much faster than linear search,
+provided the products are stored in sorted order.
