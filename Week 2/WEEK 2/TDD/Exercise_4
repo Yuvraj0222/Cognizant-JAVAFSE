@@ -1,0 +1,35 @@
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+
+public class CalculatorTest {
+
+    Calculator c;
+
+    @Before
+    public void setUp() {
+        c = new Calculator();
+        System.out.println("Setup");
+    }
+
+    @Test
+    public void testAdd() {
+
+        // Arrange
+        int a = 5;
+        int b = 3;
+
+        // Act
+        int result = c.add(a, b);
+
+        // Assert
+        assertEquals(8, result);
+    }
+
+    @After
+    public void tearDown() {
+        c = null;
+        System.out.println("Teardown");
+    }
+}
