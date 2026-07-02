@@ -1,0 +1,26 @@
+public interface ExternalApi {
+    String getData();
+}
+
+public class MyService {
+    private ExternalApi api;
+    public MyService(ExternalApi api) {
+        this.api = api;
+    }
+    public String fetchData() {
+        return api.getData();
+    }
+}
+import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+
+public class MyServiceTest {
+
+    @Test
+    public void testVerifyInteraction() {
+        ExternalApi mockApi = mock(ExternalApi.class);
+        MyService service = new MyService(mockApi);
+        service.fetchData();
+        verify(mockApi).getData();
+    }
+}
