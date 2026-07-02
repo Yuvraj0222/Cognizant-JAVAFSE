@@ -1,0 +1,47 @@
+<dependencies>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>5.10.2</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+
+public class Calculator {
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+}
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+public class CalculatorTest {
+
+    @Test
+    public void testAddition() {
+
+        Calculator calculator = new Calculator();
+
+        int result = calculator.add(5, 3);
+
+        assertEquals(8, result);
+    }
+}
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+public class CalculatorTest {
+
+    @Test
+    void testAddition() {
+
+        Calculator calculator = new Calculator();
+
+        int result = calculator.add(5, 3);
+
+        assertEquals(8, result);
+    }
+}
