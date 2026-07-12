@@ -1,0 +1,187 @@
+<dependencies>
+
+    <!-- Spring Web -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Spring Security -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <!-- JWT -->
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-api</artifactId>
+        <version>0.11.5</version>
+    </dependency>
+
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-impl</artifactId>
+        <version>0.11.5</version>
+        <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-jackson</artifactId>
+        <version>0.11.5</version>
+        <scope>runtime</scope>
+    </dependency>
+
+</dependencies>
+
+
+
+package com.example.model;
+
+public class JwtResponse {
+
+    private String token;
+
+    public JwtResponse(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+}
+
+
+
+
+package com.example.service;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+@Service
+public class JwtService {
+
+    private final String SECRET =
+            "ThisIsMySecretKeyForJwtAuthentication123456";
+
+    public String generateToken(String username) {
+
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(
+                        new Date(System.currentTimeMillis() + 3600000))
+                .signWith(
+                        SignatureAlgorithm.HS256,
+                        SECRET)
+                .compact();
+    }
+
+}
+
+
+
+
+package com.example.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http)
+            throws Exception {
+
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/authenticate")
+                        .authenticated()
+                        .anyRequest()
+                        .authenticated())
+                .httpBasic(Customizer.withDefaults());
+
+        return http.build();
+    }
+
+    @Bean
+    public InMemoryUserDetailsManager users() {
+
+        UserDetails user = User
+                .withUsername("user")
+                .password("{noop}pwd")
+                .roles("USER")
+                .build();
+
+        return new InMemoryUserDetailsManager(user);
+    }
+
+}
+
+
+
+package com.example.controller;
+
+import com.example.model.JwtResponse;
+import com.example.service.JwtService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
+@RestController
+public class AuthenticationController {
+
+    @Autowired
+    JwtService jwtService;
+
+    @GetMapping("/authenticate")
+    public JwtResponse authenticate(
+            @RequestHeader("Authorization")
+            String authorization) {
+
+        String base64Credentials =
+                authorization.substring("Basic ".length());
+
+        byte[] decodedBytes =
+                Base64.getDecoder()
+                        .decode(base64Credentials);
+
+        String credentials =
+                new String(decodedBytes,
+                        StandardCharsets.UTF_8);
+
+        String[] values =
+                credentials.split(":");
+
+        String username = values[0];
+
+        String token =
+                jwtService.generateToken(username);
+
+        return new JwtResponse(token);
+    }
+
+}
+
+
+
+localhost:8090
