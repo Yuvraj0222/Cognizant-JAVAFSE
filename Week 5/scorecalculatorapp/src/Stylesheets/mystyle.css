@@ -1,0 +1,161 @@
+/* Import a premium Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* Global Styles and Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f8fafc;
+}
+
+/* Center Aligned Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  margin: auto;
+}
+
+/* Professional Heading with Gradient Text */
+.heading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  background: linear-gradient(to right, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+}
+
+/* Premium Card Layout */
+.detail-card {
+  width: 100%;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 
+              0 10px 10px -5px rgba(0, 0, 0, 0.2),
+              0 0 40px rgba(99, 102, 241, 0.1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.4), 
+              0 15px 15px -5px rgba(0, 0, 0, 0.3),
+              0 0 50px rgba(99, 102, 241, 0.2);
+}
+
+/* Detail Row Layout */
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 1.1rem;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+/* Specific styling for Row labels */
+.label {
+  font-weight: 500;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+/* Name Styling - Teal Accent */
+.name {
+  font-weight: 600;
+  color: #2dd4bf;
+  text-shadow: 0 0 10px rgba(45, 212, 191, 0.2);
+}
+
+/* School Styling - Amber Accent */
+.school {
+  font-weight: 500;
+  color: #fbbf24;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+  text-align: right;
+  max-width: 65%;
+}
+
+/* Total Marks Styling - Indigo Accent */
+.total {
+  font-weight: 600;
+  color: #818cf8;
+  text-shadow: 0 0 10px rgba(129, 140, 248, 0.2);
+}
+
+/* Goal Marks Styling - Muted grey */
+.goal {
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+/* Highlighted Score Section */
+.detail-row.highlight {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 16px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Score Styling - Emerald Accent with pulse */
+.score {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #34d399;
+  text-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
+}
+
+/* Responsive adjustment */
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .detail-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .heading {
+    font-size: 1.5rem;
+  }
+  
+  .score {
+    font-size: 1.5rem;
+  }
+}
