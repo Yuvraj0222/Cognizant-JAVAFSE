@@ -1,0 +1,228 @@
+/* ============================================================================
+   Project: StudentApp - Student Management Portal
+   File: src/App.css
+   Description: Professional academic layout styling with card-like sections,
+                responsive grid spacing, elegant dark theme, and typography.
+   ============================================================================ */
+
+/* Root Variables & Color Tokens */
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  --header-bg: rgba(15, 23, 42, 0.85);
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --accent-home: #38bdf8;
+  --accent-about: #a855f7;
+  --accent-contact: #34d399;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* App Layout Container */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Portal Header */
+.portal-header {
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.portal-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+}
+
+.main-title {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub-title {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.meta-badge {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: var(--accent-home);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Main Body Section */
+.portal-body {
+  max-width: 900px;
+  width: 100%;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Intro Banner */
+.intro-banner {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.intro-banner h2 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #e2e8f0;
+}
+
+.intro-banner p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Component Cards */
+.component-wrapper {
+  width: 100%;
+}
+
+.component-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 2.25rem;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.component-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Individual Card Accent Borders */
+.home-card {
+  border-left: 5px solid var(--accent-home);
+}
+
+.about-card {
+  border-left: 5px solid var(--accent-about);
+}
+
+.contact-card {
+  border-left: 5px solid var(--accent-contact);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-badge {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.card-type {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  color: var(--text-muted);
+}
+
+/* Required Component Heading */
+.portal-heading {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+}
+
+.card-description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Portal Footer */
+.portal-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.9);
+  border-top: 1px solid var(--card-border);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 640px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  .portal-heading {
+    font-size: 1.25rem;
+  }
+  .component-card {
+    padding: 1.5rem;
+  }
+}
