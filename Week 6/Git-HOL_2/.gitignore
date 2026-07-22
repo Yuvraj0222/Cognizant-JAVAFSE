@@ -1,0 +1,4 @@
+*.log
+logs/
+build_logs/
+temp_logs/
