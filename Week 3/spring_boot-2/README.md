@@ -26,9 +26,9 @@ Load Country
 
 ## ⚙️ How to Run
 
-1. Open a terminal in the `Load Country` directory:
+1. Open a terminal in the `spring_boot-2` directory:
    ```bash
-   cd "Week 3/Load Country"
+   cd "Week 3/spring_boot-2"
    ```
 2. Build the project using Maven:
    ```bash
