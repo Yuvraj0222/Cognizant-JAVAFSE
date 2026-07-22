@@ -57,3 +57,6 @@ cohortdashboard
 ├── package.json
 └── README.md
 ```
+
+
+the app is live at : http://localhost:3002
