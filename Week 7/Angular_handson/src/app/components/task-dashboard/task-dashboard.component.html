@@ -1,0 +1,130 @@
+<div class="dashboard-wrapper">
+  <header class="dashboard-header">
+    <h1>Enterprise Task Manager</h1>
+    <p>standalone architecture &bull; NgRx State Pipeline &bull; HttpClient Interceptors</p>
+  </header>
+
+  <!-- Loader state -->
+  <div *ngIf="loading$ | async" class="loader-overlay">
+    <div class="spinner"></div>
+    <p>Synchronizing task ledger...</p>
+  </div>
+
+  <!-- Error display -->
+  <div *ngIf="error$ | async as errorMsg" class="error-alert">
+    <strong>Synchronizing Error:</strong> {{ errorMsg }}
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- Left Section: Add Task Form -->
+    <section class="form-section card">
+      <h2>Create New Task</h2>
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
+        <div class="form-group">
+          <label for="title">Task Title</label>
+          <input
+            id="title"
+            type="text"
+            formControlName="title"
+            placeholder="Enter short title"
+          />
+          <div *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid" class="validation-error">
+            <span *ngIf="taskForm.get('title')?.errors?.['required']">Title is required.</span>
+            <span *ngIf="taskForm.get('title')?.errors?.['minlength']">Title must be at least 3 characters.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            formControlName="description"
+            rows="3"
+            placeholder="Detail task activities"
+          ></textarea>
+          <div *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid" class="validation-error">
+            Description is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="priority">Priority</label>
+          <select id="priority" formControlName="priority">
+            <option value="low">Low Priority</option>
+            <option value="medium">Medium Priority</option>
+            <option value="high">High Priority</option>
+          </select>
+        </div>
+
+        <button type="submit" [disabled]="taskForm.invalid" class="btn submit-btn">
+          Dispatch Task
+        </button>
+      </form>
+    </section>
+
+    <!-- Right Section: Task List -->
+    <section class="list-section card">
+      <div class="list-header">
+        <h2>Task Ledger</h2>
+        <!-- Filters toggle bar -->
+        <div class="filter-bar" *ngIf="filter$ | async as activeFilter">
+          <button
+            class="filter-btn"
+            [class.active]="activeFilter === 'all'"
+            (click)="setFilter('all')"
+          >
+            All Tasks
+          </button>
+          <button
+            class="filter-btn"
+            [class.active]="activeFilter === 'pending'"
+            (click)="setFilter('pending')"
+          >
+            Pending
+          </button>
+          <button
+            class="filter-btn"
+            [class.active]="activeFilter === 'completed'"
+            (click)="setFilter('completed')"
+          >
+            Completed
+          </button>
+        </div>
+      </div>
+
+      <div class="task-cards-list">
+        <div *ngIf="(tasks$ | async)?.length === 0" class="empty-state">
+          <p>No tasks mapped to this filter index.</p>
+        </div>
+
+        <div
+          *ngFor="let task of tasks$ | async"
+          class="task-card"
+          [class.completed-card]="task.completed"
+        >
+          <div class="card-left">
+            <div class="card-meta">
+              <span class="priority-badge" [ngClass]="'priority-' + task.priority">
+                {{ task.priority }}
+              </span>
+              <span class="id-badge">#{{ task.id }}</span>
+            </div>
+            <h3 class="task-title">{{ task.title }}</h3>
+            <p class="task-desc">{{ task.description }}</p>
+          </div>
+
+          <div class="card-right">
+            <!-- Toggle completion status -->
+            <button
+              class="btn toggle-btn"
+              [class.btn-success]="task.completed"
+              (click)="toggleStatus(task.id)"
+            >
+              {{ task.completed ? 'Completed' : 'Mark Complete' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
