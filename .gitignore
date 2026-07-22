@@ -1,0 +1,21 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Ignore root-level folders to keep them out of git root tracking
+/Angular_handson/
+/blogapp/
+/bloggerapp/
+/cohortdashboard/
+/cricketapp/
+/eventexamplesapp/
+/officespacerentalapp/
+/scorecalculatorapp/
+/ticketbookingapp/
+/Git-HOL_1/
+/Git-HOL_2/
+/Git-HOL_4/
+/Git_HOL_3/
+/Git_HOL_4/
+/Git_HOL_5/
+/temp_repo/
