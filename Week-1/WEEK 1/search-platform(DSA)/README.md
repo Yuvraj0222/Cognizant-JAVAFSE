@@ -25,7 +25,7 @@ search-platform
 
 1. Open a terminal in the project directory:
    ```bash
-   cd "Week-1/WEEK 1/search-platform"
+   cd "Week-1/WEEK 1/search-platform(DSA)"
    ```
 2. Build the project using Maven:
    ```bash
