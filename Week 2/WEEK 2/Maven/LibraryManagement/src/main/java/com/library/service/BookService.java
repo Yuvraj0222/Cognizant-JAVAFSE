@@ -9,7 +9,7 @@ public class BookService {
 
     private BookRepository bookRepository;
 
-    // Setter method for property/setter injection from Spring XML configuration
+    // Setter method for property/setter injection (XML configuration wired)
     public void setBookRepository(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }

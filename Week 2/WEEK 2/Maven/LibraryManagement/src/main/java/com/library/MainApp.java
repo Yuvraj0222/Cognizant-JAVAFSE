@@ -12,10 +12,10 @@ public class MainApp {
         // Load the Spring ApplicationContext using ClassPathXmlApplicationContext (closed via try-with-resources)
         try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml")) {
             
-            // Retrieve the BookService bean from the Spring container
+            // Retrieve the BookService bean from the Spring IoC container
             BookService bookService = context.getBean("bookService", BookService.class);
             
-            // Invoke the business operation
+            // Invoke the business operation to display books
             bookService.displayBooks();
         }
     }
