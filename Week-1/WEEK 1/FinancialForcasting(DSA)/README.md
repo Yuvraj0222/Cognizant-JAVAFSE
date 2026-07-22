@@ -20,7 +20,7 @@ FinancialForecasting
 
 ## ⚙️ How to Compile & Run
 
-Open a terminal or command prompt in the `FinancialForecasting` directory:
+Open a terminal or command prompt in the `FinancialForcasting(DSA)` directory:
 
 ### 1. Compile the source files:
 ```bash
