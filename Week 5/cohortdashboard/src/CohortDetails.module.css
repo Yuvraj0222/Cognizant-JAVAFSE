@@ -1,0 +1,31 @@
+/**
+ * CohortDetails.module.css
+ *
+ * This is a CSS Module file. CSS Modules are CSS files in which all class names
+ * and animation names are scoped locally by default. When imported in a React
+ * component, the module returns an object whose keys are the class names defined
+ * in this file, and whose values are the auto-generated unique class names.
+ *
+ * This prevents class name collisions across different components, making styles
+ * modular and maintainable.
+ *
+ * Usage in component:
+ *   import styles from "./CohortDetails.module.css";
+ *   <div className={styles.box}> ... </div>
+ */
+
+/* ===== Box class: wraps each individual cohort card ===== */
+.box {
+  width: 300px;
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  vertical-align: top;
+}
+
+/* ===== Tag selector: style the <dt> (definition term) element ===== */
+dt {
+  font-weight: 500;
+}
