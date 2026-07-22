@@ -1,178 +1,170 @@
-# Theory & Q&A: Maven Configuration
+# Theory & Q&A: Library Management System
 
-This document contains detailed theoretical analysis, POM structure explanations, Maven build lifecycle breakdowns, compiler configurations, troubleshooting steps, and interview preparation questions.
-
----
-
-## 📘 Maven Fundamentals
-
-### 1. What is Maven?
-Apache Maven is a software project management and comprehension tool. Based on the concept of a Project Object Model (POM), Maven can manage a project's build, reporting, and documentation from a central piece of information.
-
-### 2. The POM (pom.xml)
-The Project Object Model (POM) is the core unit of work in Maven. It is an XML file that contains information about the project and configuration details used by Maven to build the project. It includes coordinates (groupId, artifactId, version), dependencies, and plugins.
-
-### 3. Dependency Management
-- **groupId**: Unique identifier of the organization or group that created the project (e.g. `com.library`).
-- **artifactId**: Unique base name of the primary artifact being generated (e.g. `LibraryManagement`).
-- **version**: The specific version of the generated artifact (e.g. `1.0-SNAPSHOT`).
-- **packaging**: Defines the output format (e.g. `jar`, `war`, `pom`).
-
-### 4. Maven Build Lifecycle
-A build lifecycle is a well-defined sequence of phases. Standard lifecycles include:
-- `clean`: Deletes the target directory to start fresh.
-- `compile`: Compiles the source code of the project.
-- `test`: Runs tests using suitable unit testing frameworks.
-- `package`: Takes the compiled code and packages it in its distributable format, such as a JAR.
-- `install`: Installs the package into the local repository, for use as a dependency in other projects.
+This document contains detailed theoretical analysis, structural explanations, comparisons of Spring configuration styles, dependency injection mechanics, troubleshooting steps, and interview preparation questions.
 
 ---
 
-## 📐 Dependency Analysis (Spring Core Modules)
+## 📘 Spring Core Fundamentals
 
-This project requests three specific Spring dependencies configured for **Java 1.8**:
-1. **Spring Context**: Extends the BeanFactory to add support for internationalization, event propagation, and resource-loading.
-2. **Spring AOP**: Provides aspect-oriented programming implementation, allowing you to define method interceptors and pointcuts to cleanly decouple cross-cutting concerns.
-3. **Spring WebMVC**: Provides the Model-View-Controller architecture and components for building robust web applications.
+### 1. Inversion of Control (IoC)
+Inversion of Control (IoC) is a design principle where the control of object creation, configuration, and lifecycle management is transferred from the application code to a framework container (the Spring IoC Container).
+- **Without IoC**: The developer instantiates dependencies using `new` (e.g. `BookRepository repo = new BookRepository()`).
+- **With IoC**: The Spring container manages bean instantiations and lifecycle, resolving dependencies at runtime.
 
-*Note*: Because Spring Framework 6.x requires a minimum of Java 17, we use the stable **Spring 5.3.37** version, which fully supports Java 8 (1.8).
+### 2. Dependency Injection (DI)
+Dependency Injection is a pattern implementing IoC where the container supplies (injects) dependent objects to a class.
+- **Setter Injection**: Injects dependencies by calling setter methods after the bean is instantiated. Done using the `<property>` tag in XML (e.g. `<property name="bookRepository" ref="bookRepository"/>`).
+- **Constructor Injection**: Injects dependencies by passing arguments to the constructor during bean creation. Done using the `<constructor-arg>` tag in XML.
+
+### 3. XML Configuration
+XML Configuration externalizes bean wiring from Java code. It lists bean ids, classes, scopes, and properties, allowing you to update bean relationships without modifying or recompiling the source code.
 
 ---
 
 ## ⚠️ Troubleshooting Common Errors
 
-1. **`UnsupportedClassVersionError`**:
-   - *Cause*: Compiling with a newer JDK version but attempting to run on an older JRE that does not support the target class file version.
-   - *Solution*: Ensure the Maven compiler plugin configuration source and target match your installed runtime JDK (Java 1.8).
-2. **`DependencyResolutionException`**:
-   - *Cause*: Attempting to use a dependency version that does not exist in Maven Central, or network connectivity failures during dependency downloads.
-   - *Solution*: Double-check Spring framework version mappings and internet proxy configurations.
+1. **`BeanCreationException`**:
+   - *Cause*: Spring cannot instantiate a bean or inject properties (e.g., misspelled setter name or invalid class name in XML).
+   - *Solution*: Verify that the property name in `<property name="bookRepository" ...>` matches the setter method signature `setBookRepository(...)` in `BookService.java`.
+2. **`FileNotFoundException` (Context XML not found)**:
+   - *Cause*: Spring cannot find `applicationContext.xml` on the classpath.
+   - *Solution*: Ensure the XML file resides directly in the `src/main/resources/` directory.
 
 ---
 
 ## 🎓 Interview Preparation Q&As
 
 ### 30 Beginner Questions
-1. What is Maven?
-2. What does POM stand for?
-3. What is the default configuration file name in Maven?
-4. What is a Group ID in Maven?
-5. What is an Artifact ID in Maven?
-6. What is a Version in Maven?
-7. What does `SNAPSHOT` represent in Maven versions?
-8. What does `<packaging>` define?
-9. What is the default value of the packaging tag if omitted?
-10. What is a dependency in Maven?
-11. What is the central repository in Maven?
-12. What is the local repository in Maven, and where is it located?
-13. What command compiles the project?
-14. What command packages the project into a JAR?
-15. What does `mvn clean` do?
-16. What does `mvn install` do?
-17. What is a Maven plugin?
-18. What is the Maven Compiler Plugin used for?
-19. What do `<source>` and `<target>` specify in the Compiler Plugin?
-20. Why do we target Java 1.8 in this configuration?
-21. What is the minimum Spring version that supports Java 8?
-22. Can Spring 6.x run on Java 1.8? Why or why not?
-23. What is Spring Context?
-24. What is Spring AOP?
-25. What is Spring WebMVC?
-26. What is target folder in Maven directory structure?
-27. How does Maven handle transitive dependencies?
-28. What is XML namespace in pom.xml?
-29. How do you add comments in pom.xml?
-30. What is `<properties>` block used for in pom.xml?
+1. What is Spring Framework?
+2. What is the Spring Core Container?
+3. What is a Spring Bean?
+4. What is Inversion of Control (IoC)?
+5. What is Dependency Injection (DI)?
+6. Name the two main types of Dependency Injection.
+7. What is Setter Injection?
+8. What is Constructor Injection?
+9. What XML tag represents a property in a Spring bean definition?
+10. What attribute of the `<property>` tag is used to reference another bean?
+11. What attribute of the `<property>` tag is used to inject literal values?
+12. What class is used to load class path XML configurations?
+13. What method retrieves a bean from the context?
+14. What does the `<beans>` tag in Spring XML files represent?
+15. What does the `<bean>` tag represent?
+16. What is the default bean scope in Spring?
+17. What is Maven?
+18. What is the role of `pom.xml` in Maven?
+19. What is a Maven dependency?
+20. What group ID and artifact ID are used for Spring context?
+21. What is Java 21?
+22. Where do Java source files reside in a Maven project?
+23. Where do resources like XML config files reside in Maven?
+24. What does the command `mvn clean package` do?
+25. Explain the difference between `ref` and `value` in property injection.
+26. What does `DBMS_OUTPUT` do in database procedures (or `System.out.println` in Java)?
+27. Why do we close the application context?
+28. What is loose coupling?
+29. What is tight coupling?
+30. What is a JavaBean?
 
 ---
 
 ### 20 Intermediate Questions
-31. Explain the difference between `mvn package` and `mvn install`.
-32. What are the three built-in build lifecycles of Maven?
-33. Explain the relationship between phases and goals in Maven lifecycles.
-34. What is the local repository path on Windows and Linux by default?
-35. How can you override the default local repository location in settings.xml?
-36. What is a dependency scope in Maven? Name five scopes.
-37. Explain the difference between `compile` scope and `provided` scope.
-38. What is the purpose of the dependency management (`<dependencyManagement>`) section?
-39. What is a transitive dependency collision, and how do you resolve it?
-40. What tag is used to exclude specific transitive dependencies?
-41. Compare Maven with Gradle build tool.
-42. How does the Maven Compiler Plugin interface with the system JDK?
-43. What is a super POM?
-44. How does Maven determine the order of plugin execution?
-45. Explain the difference between snapshots and release versions.
-46. What is the role of `settings.xml` in Maven?
-47. How do you configure profile-based builds in Maven?
-48. What is the command to view the dependency tree of a Maven project?
-49. What is `mvn dependency:tree`?
-50. Explain how parent-child POM relationships work.
+31. Compare Setter Injection and Constructor Injection. When is each preferred?
+32. What is the difference between BeanFactory and ApplicationContext?
+33. How does Spring resolve dependencies dynamically?
+34. Explain the difference between eager loading and lazy loading in Spring context.
+35. How does Spring handle circular dependencies in Setter Injection?
+36. Why can't Spring resolve circular dependencies in Constructor Injection?
+37. What is bean scope? Explain Singleton vs Prototype.
+38. Explain how Spring's XML configuration supports the Open/Closed Principle.
+39. What is the role of `org.springframework:spring-context` dependency?
+40. What are transitive dependencies in Maven?
+41. What is classloader isolation?
+42. How does Spring detect property setters using Reflection?
+43. What is the role of PropertyEditors in Spring?
+44. How does Spring load resources using Classpath prefixes?
+45. What is the lifecycle of a Spring Bean?
+46. What are BeanPostProcessors?
+47. What is the difference between applicationContext.xml and application.properties?
+48. What is AOP in Spring?
+49. What is a servlet container?
+50. What is SpEL (Spring Expression Language)?
 
 ---
 
 ### 10 Advanced Questions
-51. Analyze the performance impact of multi-threaded builds in Maven using the `-T` flag.
-52. How does Maven handle parallel downloads of dependency metadata from mirrors?
-53. Explain the difference between JDK Dynamic Proxy and CGLIB proxies created by Spring AOP.
-54. Design a custom Maven plugin that checks for outdated Spring dependency versions.
-55. Describe the internal mechanism of Maven Classloading (ClassWorld realms).
-56. Explain how Spring WebMVC initializes its WebApplicationContext during servlet startup.
-57. What is the impact of Java 8 default interface methods on Spring AOP method interceptors?
-58. Explain how Maven coordinates can be mapped to OSGi bundle manifests.
-59. How does Maven GPG plugin support cryptographically signed artifact releases?
-60. Compare Java 8 compilation compiler parameters (`-parameters`) with newer javac versions.
+51. Analyze the performance difference between Spring XML-based configurations and annotation-based configurations at startup.
+52. How does Spring handle bean registration internally using BeanDefinition objects?
+53. Explain the proxy creation mechanism in Spring AOP (JDK Dynamic Proxy vs CGLIB).
+54. Design a custom BeanPostProcessor that logs bean creation times.
+55. Explain the difference between BeanFactoryPostProcessor and BeanPostProcessor.
+56. How does Spring Boot's auto-configuration eliminate the need for applicationContext.xml?
+57. What is the impact of Java 21 virtual threads on Spring Core container executions?
+58. How do you implement dynamic bean registration programmatically in ApplicationContext?
+59. Explain the triple-caching strategy Spring uses to resolve circular singleton dependencies.
+60. Compare Spring's dependency resolution with Google Guice or Dagger.
 
 ---
 
 ### 25 Viva Questions & Answers
 
-1. **Q: What is the folder name of this project?**
-   - *A*: `LibraryManagement`.
-2. **Q: What is the packaging type of this project?**
-   - *A*: `jar`.
-3. **Q: What is the target Java version defined in properties?**
-   - *A*: `1.8` (Java 8).
-4. **Q: What are the three Spring dependencies added to `pom.xml`?**
-   - *A*: Spring Context, Spring AOP, Spring WebMVC.
-5. **Q: What Spring version was chosen to compile on Java 1.8?**
-   - *A*: `5.3.37` (Spring 5.3.x is the latest stable branch that supports Java 8).
-6. **Q: Are there any Java source files in this project?**
-   - *A*: No, the requirements specify "Do NOT create any Java classes" and "Do NOT create any XML configuration files" inside the source folder.
-7. **Q: What are the empty folders under `src/`?**
-   - *A*: `src/main/java` and `src/test/java`.
-8. **Q: What command builds and installs this Maven project?**
-   - *A*: `mvn clean install`.
-9. **Q: Where is the local repository of Maven usually located?**
-   - *A*: In the `.m2/repository` directory of the user home folder.
-10. **: What is the artifactId of the project?**
-    - *A*: `LibraryManagement`.
-11. **Q: What is the groupId of the project?**
-    - *A*: `com.library`.
-12. **Q: What is the version of the project?**
-    - *A*: `1.0-SNAPSHOT`.
-13. **Q: What does the Maven Compiler Plugin do?**
-    - *A*: Compiles the Java source files of the project using the configured JDK compiler settings.
-14. **Q: What version of the Maven Compiler Plugin is configured?**
-    - *A*: `3.13.0`.
-15. **Q: What does compile scope mean?**
-    - *A*: The dependency is available in all classpaths of the project and will be packaged.
-16. **Q: What tag is the root element of `pom.xml`?**
-    - *A*: `<project>`.
-17. **Q: What schema validates the `pom.xml` document?**
-    - *A*: XML Schema Definition (XSD) from `http://maven.apache.org/POM/4.0.0`.
-18. **Q: Can we run this project as a main class?**
-    - *A*: No, because there are no Java classes implemented. It is a configuration-only package.
-19. **Q: What is a build lifecycle?**
-    - *A*: A sequence of named build phases that define the order of execution.
-20. **Q: What does clean phase do?**
-    - *A*: Removes the target directory containing previous build output.
-21. **Q: Why is Spring WebMVC included?**
-    - *A*: To support Web MVC controllers and rendering dependencies if the project is extended in the future.
-22. **Q: What does AOP stand for?**
-    - *A*: Aspect-Oriented Programming.
-23. **Q: What is the difference between groupId and artifactId?**
-    - *A*: GroupId is the organization package namespace (like a Java package), and artifactId is the project name.
-24. **Q: What is transitive dependency?**
-    - *A*: Dependencies required by our direct dependencies that Maven resolves and downloads automatically.
-25. **Q: What version of POM schema is standard?**
-    - *A*: `4.0.0`.
+1. **Q: What is the main class name of this project?**
+   - *A*: `MainApp` (package `com.library`).
+2. **Q: Which class handles data operations?**
+   - *A*: `BookRepository`.
+3. **Q: Which class implements business delegation?**
+   - *A*: `BookService`.
+4. **Q: What is the name of the Spring XML configuration file?**
+   - *A*: `applicationContext.xml`.
+5. **Q: Where is `applicationContext.xml` stored?**
+   - *A*: In the `src/main/resources/` directory.
+6. **Q: How is the BookRepository bean injected into BookService?**
+   - *A*: Via property/setter injection in XML.
+7. **Q: What is the setter method name in BookService?**
+   - *A*: `setBookRepository(BookRepository bookRepository)`.
+8. **Q: What does `MainApp` use to load the context?**
+   - *A*: `ClassPathXmlApplicationContext`.
+9. **Q: What are the three sample books printed?**
+   - *A*: Java Programming, Spring Framework, Database Systems.
+10. **Q: What is the default bean scope of `bookService` in this project?**
+    - *A*: Singleton (since no scope is declared, it defaults to singleton).
+11. **Q: Why is there no Spring Boot dependencies in `pom.xml`?**
+    - *A*: Because this is a Spring Core XML configuration exercise running on basic Spring context libraries.
+12. **Q: What compiles the project?**
+    - *A*: Maven (`mvn clean package`).
+13. **Q: What runs the project from terminal?**
+    - *A*: `mvn exec:java -Dexec.mainClass="com.library.MainApp"`.
+14. **Q: What is the type of injection used?**
+    - *A*: Setter Injection.
+15. **Q: Can we perform constructor injection in this project?**
+    - *A*: Yes, by creating a constructor in `BookService` and replacing `<property>` with `<constructor-arg>` in XML.
+16. **Q: What is the space complexity of this app?**
+    - *A*: $O(1)$ auxiliary space.
+17. **Q: What is the time complexity of startup?**
+    - *A*: $O(B)$ where $B$ is the number of beans declared.
+18. **Q: What does the `<property>` ref attribute point to?**
+    - *A*: The `id` of another declared bean in the XML file.
+19. **Q: What does the class attribute in the `<bean>` tag define?**
+    - *A*: The fully qualified class name of the target bean.
+20. **Q: What is an application context?**
+    - *A*: Spring's advanced IoC container interface, inheriting BeanFactory.
+21. **Q: Why is try-with-resources used to instantiate ClassPathXmlApplicationContext?**
+    - *A*: To ensure the container is automatically closed when MainApp finishes, preventing memory leaks.
+22. **Q: What happens if you try to get a bean with an unregistered ID?**
+    - *A*: A `NoSuchBeanDefinitionException` is thrown.
+23. **Q: What compiler version is targeted in `pom.xml`?**
+    - *A*: Java 21.
+24. **Q: Can we use `@Autowired` in this project?**
+    - *A*: Not without enabling component scanning or annotation support via `<context:annotation-config/>` in XML.
+25. **Q: What is the purpose of loose coupling?**
+    - *A*: Allows changing class implementations (e.g. replacing BookRepository with a database implementation) without modifying the dependent service class.
+
+---
+
+## 🌟 Future Enhancements
+
+To modernize this application:
+- **Annotation Configuration**: Replace XML bean declarations with `@Repository` and `@Service` annotations, using `@Autowired` for dependency wiring.
+- **Java Configuration**: Declare beans in a class annotated with `@Configuration` using `@Bean` methods.
+- **Spring Boot**: Bootstrap using `SpringApplication.run()`, eliminating XML and manual context loading configurations entirely.
+- **Database Integration**: Connect to a database (H2, MySQL) using Spring Data JPA and Hibernate to persist book entities.
