@@ -3,25 +3,62 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Project Coordinates defining Group ID, Artifact ID, Version, and Packaging -->
     <groupId>com.library</groupId>
     <artifactId>LibraryManagement</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>LibraryManagement</name>
-    <description>Exercise 1: Library Management using Spring XML Configuration</description>
+    <packaging>jar</packaging>
 
+    <name>LibraryManagement</name>
+    <description>Exercise 1: Basic Maven Configuration using Spring Core (Java 8)</description>
+
+    <!-- Properties defining compiler settings and Spring framework version -->
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <!-- Specify compiler source and target compliance as Java 1.8 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>6.1.11</spring.version>
+        <!-- Spring 5.3.x is the final major Spring generation supporting Java 8 -->
+        <spring.version>5.3.37</spring.version>
     </properties>
 
+    <!-- Spring dependencies configured for the project -->
     <dependencies>
-        <!-- Spring Context (includes spring-core, spring-beans, spring-aop, spring-expression) -->
+        <!-- Spring Context (Core Container module) -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <!-- Spring AOP (Aspect-Oriented Programming module) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Spring WebMVC (Web Model-View-Controller module) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
     </dependencies>
+
+    <!-- Build settings containing plugins -->
+    <build>
+        <plugins>
+            <!-- Maven Compiler Plugin to enforce Java 1.8 compilation compatibility -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -1,6 +1,6 @@
-# Library Management System
+# Library Management Maven Configuration
 
-A simple Maven command-line application demonstrating dependency injection (setter injection) in Spring Core using XML Configuration (`applicationContext.xml`), following the Cognizant FSE Digital Nurture curriculum.
+A minimal Maven project focused strictly on configuration, targeting Java 1.8 with dependencies on Spring Context, Spring AOP, and Spring WebMVC. No Java code or XML files are included, following the Cognizant FSE Digital Nurture curriculum.
 
 ---
 
@@ -10,41 +10,19 @@ A simple Maven command-line application demonstrating dependency injection (sett
 LibraryManagement
  ├── pom.xml
  └── src
-      └── main
-           ├── java
-           │    └── com.library
-           │         ├── repository
-           │         │    └── BookRepository.java
-           │         ├── service
-           │         │    └── BookService.java
-           │         └── MainApp.java
-           └── resources
-                └── applicationContext.xml
+      ├── main
+      │    └── java
+      └── test
+           └── java
 ```
 
 ---
 
-## ⚙️ How to Compile & Run
+## ⚙️ How to Build
 
 Open a terminal or command prompt in the `LibraryManagement` directory:
 
-### 1. Build the project:
+### Build the project:
 ```bash
-mvn clean package
-```
-
-### 2. Run the application:
-```bash
-mvn exec:java -Dexec.mainClass="com.library.MainApp"
-```
-
----
-
-## 💻 Expected Output
-
-```text
-Available Books:
-Java Programming
-Spring Framework
-Database Systems
+mvn clean install
 ```
